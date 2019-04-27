@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/css/font-awesome.css";
+
+body {
+	background: #333;
+	color: white;
+}
+nav {
+	margin-bottom: 1em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}
+input.form-control {
+	background: transparent !important;
+	color: white !important;
+	&::placeholder {
+		color: rgba(255, 255, 255, 0.5);
+	}
+}
