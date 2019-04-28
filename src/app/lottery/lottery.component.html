@@ -1,26 +1,27 @@
+<div class="lottery-container">
+	<form #lotteryForm="ngForm" name="lotteryForm" id="lotteryForm">
+		<div class="form-group row">
+			<div class="col">
+				<button type="button" class="btn btn-secondary mr-2" (click)="addTeam()" [disabled]="draftsPicked">Add Team</button>
+				<button type="button" class="btn btn-link mr-2" (click)="removeTeam()" [disabled]="draftsPicked || teams.length === 1"><i class="fa fa-trash-o"></i></button>
+				<button type="submit" class="btn btn-primary float-right" [disabled]="lotteryForm.invalid || draftsPicked" (click)="calculateLottery()">Submit</button>
+			</div>
+		</div>
+		<div class="form-row form-group" *ngFor="let team of teams; let i = index">
+			<div class="col">
+				<input type="text" class="form-control" name="team_name_{{i}}" [(ngModel)]="team.name" placeholder="Team Name" required>
+			</div>
+			<div class="col-md-3" *ngIf="!defaultWeight">
+				<input type="number" class="form-control" name="team_weight_{{i}}" [(ngModel)]="team.weight"  placeholder="Weight" required>
+			</div>
+		</div>
+	</form>
 
-<form #lotteryForm="ngForm" name="lotteryForm" id="lotteryForm">
-	<div class="form-group row">
-		<div class="col">
-			<button type="button" class="btn btn-secondary mr-2" (click)="addTeam()" [disabled]="draftsPicked">Add Team</button>
-			<button type="button" class="btn btn-link mr-2" (click)="removeTeam()" [disabled]="draftsPicked || teams.length === 1"><i class="fa fa-trash-o"></i></button>
-			<button type="submit" class="btn btn-primary float-right" [disabled]="lotteryForm.invalid || draftsPicked" (click)="calculateLottery()">Submit</button>
+	<div class="mt-3" *ngIf="teams.length === draftOrder.length">
+		<h3>Results</h3>
+		<div *ngFor="let team of draftOrder; let i = index" class="row form-group">
+			<div class="col-md-3"><button type="button" class="btn btn-light" (click)="flipCard(i)">Pick {{i + 1}}</button></div>
+			<div *ngIf="draftOrderFlipped[i]" class="col">{{team.name}} (Had a weight of {{team.weight}})</div>
 		</div>
-	</div>
-	<div class="form-row form-group" *ngFor="let team of teams; let i = index">
-		<div class="col">
-			<input type="text" class="form-control" name="team_name_{{i}}" [(ngModel)]="team.name" placeholder="Team Name" required>
-		</div>
-		<div class="col-md-3">
-			<input type="number" class="form-control" name="team_weight_{{i}}" [(ngModel)]="team.weight"  placeholder="Weight" required>
-		</div>
-	</div>
-</form>
-
-<div class="mt-3" *ngIf="teams.length === draftOrder.length">
-	<h3>Results</h3>
-	<div *ngFor="let team of draftOrder; let i = index" class="row form-group">
-		<div class="col-md-3"><button type="button" class="btn btn-light" (click)="flipCard(i)">Pick {{i + 1}}</button></div>
-		<div *ngIf="draftOrderFlipped[i]" class="col">{{team.name}} (Had a weight of {{team.weight}})</div>
 	</div>
 </div>

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Team} from '../team';
 
 @Component({
@@ -7,19 +8,29 @@ import {Team} from '../team';
 	styleUrls: ['./lottery.component.scss']
 })
 export class LotteryComponent implements OnInit {
-	teams: Team[] = [new Team()];
 	draftOrder: Team[] = [];
 	draftOrderFlipped: any = {};
 	draftsPicked = false;
+	defaultWeight = null;
+	teams: Team[] = [];
 
-	constructor() {
+	constructor(private route: ActivatedRoute) {
 	}
 
 	ngOnInit() {
+		this.route.paramMap.subscribe(
+			params => {
+				const draftType = params.get('type');
+				if (draftType === 'normal') {
+					this.defaultWeight = 1;
+				}
+				this.teams.push(new Team(this.defaultWeight));
+			}
+		);
 	}
 
 	addTeam() {
-		this.teams.push(new Team());
+		this.teams.push(new Team(this.defaultWeight));
 	}
 
 	flipCard(i: number) {
@@ -32,6 +43,7 @@ export class LotteryComponent implements OnInit {
 
 	calculateLottery() {
 		const teams = [...this.teams];
+		teams.sort(() => Math.random() - 0.5);
 		this.draftOrder = [];
 		let allBalls = teams.map(team => team.weight).reduce((a, b) => a + b);
 		while (teams.length !== 0) {
