@@ -26,8 +26,8 @@ export class LotteryComponent implements OnInit {
 		this.draftOrderFlipped[i] = true;
 	}
 
-	removeTeam(i: number) {
-		this.teams.splice(i, 1);
+	removeTeam() {
+		this.teams.pop();
 	}
 
 	calculateLottery() {
