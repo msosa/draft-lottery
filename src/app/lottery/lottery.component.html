@@ -3,7 +3,7 @@
 		<div class="form-group row">
 			<div class="col">
 				<button type="button" class="btn btn-secondary mr-2" (click)="addTeam()" [disabled]="draftsPicked">Add Team</button>
-				<button type="button" class="btn btn-link mr-2" (click)="removeTeam()" [disabled]="draftsPicked || teams.length === 1"><i class="fa fa-trash-o"></i></button>
+				<button type="button" class="btn btn-link mr-2" (click)="removeTeam()" [disabled]="draftsPicked || teams.length === 1"><fa-icon [icon]="['far', 'trash-alt']"></fa-icon></button>
 				<button type="submit" class="btn btn-primary float-right" [disabled]="lotteryForm.invalid || draftsPicked" (click)="calculateLottery()">Submit</button>
 			</div>
 		</div>
