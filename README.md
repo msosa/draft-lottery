@@ -1,6 +1,6 @@
 # DraftLottery
 
-Can check out live site [here](https://msosa.github.io/draft-lottery/
+Can check out live site [here](https://msosa.github.io/draft-lottery/)
 
 ## Development server
 
