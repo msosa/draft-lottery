@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {LotteryComponent} from './lottery/lottery.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { LotteryComponent } from './lottery/lottery.component';
 
 const routes: Routes = [
-	{path: '', component: HomeComponent, pathMatch: 'full'},
-	{path: 'draft/:type', component: LotteryComponent},
+	{ path: '', component: HomeComponent },
+	{ path: 'draft/:type', component: LotteryComponent },
 ];
 
 @NgModule({
